@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071225">
+<title>Tropa da Maré — Central de Administração</title>
+<style>
+:root{--bg:#050b16;--panel:#0c1930;--panel2:#102344;--line:#1b4778;--blue:#1688ff;--cyan:#63ceff;--white:#eef6ff;--muted:#9eb2ca;--red:#ff6277;--green:#4bd6a2;--gold:#ffd36a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#12386a 0,transparent 48%),var(--bg);color:var(--white);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:1320px;margin:auto;padding:22px}
+header{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}.brand{display:flex;align-items:center;gap:12px}.mark{width:48px;height:48px;border:1px solid #287bd0;border-radius:14px;display:grid;place-items:center;color:var(--cyan);font-size:25px;background:#0a2343;box-shadow:0 0 22px #087bff35}h1{font-size:clamp(21px,4vw,30px);margin:0;letter-spacing:.04em}.sub,.muted{color:var(--muted);font-size:12px}
+.actions-top{display:flex;gap:8px;flex-wrap:wrap}.btn{padding:10px 13px;border-radius:10px;background:#15345c;color:var(--white);border:1px solid #24558b;font-weight:700}.btn.primary{background:linear-gradient(135deg,#0876e8,#1553b4);border-color:#3b9dff}.btn.danger{background:#421b2a;border-color:#823246}.btn.ghost{background:#0a172a}.btn:disabled{opacity:.35;cursor:not-allowed}.btn.sm{padding:7px 10px;font-size:12px}
+.notice{background:#241f12;border:1px solid #6e5721;color:#ffe3a0;padding:11px 13px;border-radius:12px;margin-bottom:16px;font-size:12px}
+.session{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#0b1a30;border:1px solid #1a3d66;border-radius:12px;padding:10px 12px;margin-bottom:16px}.session select{max-width:220px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}.stat,.panel{background:linear-gradient(160deg,#10213d,#091426);border:1px solid #17365d;border-radius:15px}.stat{padding:14px}.stat .n{font-size:27px;font-weight:850;color:var(--cyan)}.stat .l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.tabs{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 14px}.tab{padding:9px 13px;background:#0b1a30;border:1px solid #1c3e68;color:#b9cce2;border-radius:10px}.tab.active{background:#123765;color:white;border-color:#268dff}
+.layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);gap:14px}.panel{padding:17px;min-width:0}.panel h2{font-size:18px;margin:0 0 13px}.toolbar{display:flex;gap:8px;margin-bottom:12px}.toolbar input{flex:1;min-width:0}
+input,select,textarea{background:#071225;color:var(--white);border:1px solid #23466e;border-radius:9px;padding:10px 11px;width:100%;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #1688ff20}
+.member-list{display:flex;flex-direction:column;gap:7px}.member{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid #1b3b63;background:#0a172a;border-radius:11px;cursor:pointer}.member.selected{border-color:var(--blue);background:#102747;box-shadow:inset 3px 0 var(--blue)}.avatar{width:38px;height:38px;flex:0 0 38px;border-radius:11px;background:linear-gradient(135deg,#1468c4,#0b2b52);display:grid;place-items:center;font-weight:850}.member-info{flex:1;min-width:0}.member-name{font-weight:800}.member-role{font-size:12px;color:var(--muted)}.pill{font-size:10px;padding:4px 7px;border-radius:99px;background:#173b30;color:#76efbb;white-space:nowrap}.pill.off{background:#3b2029;color:#ff9aa8}.pill.one{background:#3d3217;color:#ffe18a}.member button{background:transparent;color:var(--cyan);padding:5px;border:0}
+.empty{color:var(--muted);text-align:center;padding:25px 8px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field-wrap{display:flex;flex-direction:column;gap:5px}.field-wrap label,.label{font-size:12px;color:var(--muted)}.span2{grid-column:1/-1}.section-label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--cyan);margin:17px 0 8px}.checkline{display:flex;align-items:center;gap:9px;padding:10px;background:#081529;border:1px solid #1a385d;border-radius:10px;font-size:13px}.checkline input,.perm input{width:17px;height:17px;accent-color:#1688ff}.permissions{display:grid;grid-template-columns:1fr 1fr;gap:7px}.perm{display:flex;align-items:center;gap:8px;padding:9px;background:#081529;border:1px solid #1a385d;border-radius:9px;font-size:12px}
+.form-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.help{font-size:11px;color:var(--muted);margin:7px 0 0}
+.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:540px}th,td{text-align:left;padding:10px 9px;border-bottom:1px solid #1c385a;font-size:12px}th{color:var(--cyan);font-weight:750}td{color:#dbeaff}.log{display:flex;flex-direction:column;gap:8px}.log-item{padding:10px;background:#081529;border:1px solid #1a385d;border-radius:9px;font-size:12px}.log-item time{display:block;color:var(--muted);font-size:10px;margin-top:3px}
+.hidden{display:none!important}.footer{text-align:center;color:#7790ad;font-size:11px;margin:18px 0 4px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.wrap{padding:12px}.panel{padding:13px}.form-grid{grid-template-columns:1fr}.span2{grid-column:auto}.permissions{grid-template-columns:1fr}.session select{max-width:100%;flex:1}.session{align-items:flex-start}.member{gap:7px}.pill{font-size:9px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+ <div class="brand"><div class="mark">≋</div><div><h1>TROPA DA MARÉ</h1><div class="sub">Central de administração • Membros, cargos e permissões</div></div></div>
+ <div class="actions-top">
+  <button class="btn" id="backupBtn">Exportar backup</button>
+  <button class="btn" id="importBtn">Importar backup</button><input id="importFile" type="file" accept="application/json" class="hidden">
+  <button class="btn primary" id="newBtn">＋ Novo membro</button>
+ </div>
+</header>
+<div class="notice"><b>Aviso sobre segurança:</b> esta versão salva no navegador e demonstra as regras de acesso. A seleção de usuário não é autenticação segura: para impedir fraudes e compartilhar dados entre celulares, publique com servidor, login e banco de dados. Não use este protótipo como controle de acesso real.</div>
+<div class="session">
+ <span>👤 <b>Sessão atual:</b></span><select id="currentUser" aria-label="Selecionar usuário da sessão"></select>
+ <span id="sessionBadge" class="pill">Visualização</span>
+ <span class="muted" id="sessionHelp">Membros 01 e cargos superiores (como Dono) podem adicionar ou remover membros.</span>
+</div>
+<section class="stats">
+ <div class="stat"><div class="n" id="total">0</div><div class="l">Membros cadastrados</div></div>
+ <div class="stat"><div class="n" id="active">0</div><div class="l">Membros ativos</div></div>
+ <div class="stat"><div class="n" id="ones">0</div><div class="l">Membros 01</div></div>
+ <div class="stat"><div class="n" id="perms">0</div><div class="l">Permissões concedidas</div></div>
+</section>
+<nav class="tabs">
+ <button class="tab active" data-tab="members">Membros</button>
+ <button class="tab" data-tab="roles">Cargos e permissões</button>
+ <button class="tab" data-tab="audit">Histórico</button>
+</nav>
+<section id="membersTab">
+ <main class="layout">
+  <section class="panel">
+   <h2>Quadro da tropa</h2>
+   <div class="toolbar"><input id="search" placeholder="Buscar membro ou cargo..."><select id="filter" style="max-width:135px"><option value="all">Todos</option><option value="active">Ativos</option><option value="inactive">Inativos</option><option value="01">Somente 01</option></select></div>
+   <div class="member-list" id="memberList"></div>
+   <p class="help">A ordem pode ser alterada no cadastro. Novos membros aparecem aqui assim que forem salvos.</p>
+  </section>
+  <section class="panel" id="editorPanel">
+   <h2 id="editorTitle">Ficha do membro</h2>
+   <div id="emptyEditor" class="empty">Selecione um membro para ver e editar a ficha.</div>
+   <form id="memberForm" class="hidden">
+    <div class="form-grid">
+     <div class="field-wrap"><label for="name">Nome / identificação</label><input id="name" maxlength="40" required placeholder="Ex.: ZK"></div>
+     <div class="field-wrap"><label for="role">Cargo</label><input id="role" maxlength="70" required placeholder="Ex.: 01 | Gerente de Farm"></div>
+     <div class="field-wrap span2"><label for="description">Responsabilidade / observação</label><textarea id="description" rows="2" maxlength="240" placeholder="Descreva a função deste membro"></textarea></div>
+     <div class="field-wrap"><label for="status">Status</label><select id="status"><option value="active">Ativo</option><option value="inactive">Inativo</option></select></div>
+     <div class="field-wrap"><label for="order">Posição na hierarquia</label><input id="order" type="number" min="1" max="999" value="1"></div>
+    </div>
+    <div class="section-label">Autorização especial</div>
+    <label class="checkline"><input id="is01" type="checkbox"> <span><b>Este membro é 01</b><br><small class="muted">Pode adicionar e remover membros da facção.</small></span></label>
+    <p class="help" id="oneHelp">Somente uma sessão 01 ou superior pode alterar essa autorização.</p>
+    <div class="section-label">Permissões individuais</div>
+    <div class="permissions" id="permissions"></div>
+    <p class="help">As permissões abaixo controlam as funções do painel. A autorização 01 é separada e controla exclusivamente adicionar/remover membros.</p>
+    <div class="form-actions">
+     <button class="btn primary" type="submit" id="saveBtn">Salvar alterações</button>
+     <button class="btn" type="button" id="cancelBtn">Cancelar</button>
+     <button class="btn danger" type="button" id="removeBtn">Remover membro</button>
+    </div>
+   </form>
+  </section>
+ </main>
+</section>
+<section id="rolesTab" class="hidden">
+ <div class="panel">
+  <h2>Resumo de cargos e acessos</h2>
+  <p class="help">A marcação de 01 libera adicionar/remover membros. As demais permissões são independentes.</p>
+  <div class="table-wrap"><table><thead><tr><th>Membro</th><th>Cargo</th><th>01?</th><th>Permissões de painel</th><th>Status</th></tr></thead><tbody id="roleRows"></tbody></table></div>
+ </div>
+</section>
+<section id="auditTab" class="hidden">
+ <div class="panel">
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><h2>Histórico de alterações</h2><button class="btn sm" id="clearLogBtn">Limpar histórico</button></div>
+  <div id="auditList" class="log"></div>
+ </div>
+</section>
+<div class="footer">TROPA DA MARÉ • União, respeito e lealdade</div>
+</div>
+<script>
+const KEY="tropa-mare-admin-v2", LOGKEY="tropa-mare-audit-v2", SESSIONKEY="tropa-mare-session-v2";
+const permissionDefs=[
+ ["manageMembers","Gerenciar cadastros (sem adicionar/remover)"],
+ ["manageRoles","Editar cargos e hierarquia"],
+ ["manageFarm","Gerenciar farm"],
+ ["manageActions","Gerenciar ações"],
+ ["supervise","Supervisão"],
+ ["pilot","Pilotagem / P1"],
+ ["viewReports","Ver relatórios"],
+ ["adminPanel","Acessar painel administrativo"]
+];
+const defaultMembers=[
+ {id:"zk",name:"ZK",role:"Dono",description:"Liderança máxima e decisões finais da facção.",status:"active",order:1,is01:false,permissions:{manageRoles:true,viewReports:true,adminPanel:true}},
+ {id:"bruxo",name:"Bruxo",role:"01 | Gerente de Farm",description:"Responsável pela farm e organização das atividades.",status:"active",order:2,is01:true,permissions:{manageFarm:true,viewReports:true,adminPanel:true}},
+ {id:"mk",name:"MK",role:"01 | 1° Gerente de Ação",description:"Coordena e organiza as ações da tropa.",status:"active",order:3,is01:true,permissions:{manageActions:true,viewReports:true,adminPanel:true}},
+ {id:"2ldasiria",name:"2Ldasíria",role:"2° Gerente de Ação",description:"Auxilia na organização das ações e no suporte das operações.",status:"active",order:4,is01:false,permissions:{manageActions:true}},
+ {id:"rdtrem",name:"RDtrem",role:"01",description:"Membro 01 da tropa.",status:"active",order:5,is01:true,permissions:{}},
+ {id:"kayque",name:"Kayque",role:"Braço direito",description:"Apoia a liderança e fortalece a equipe.",status:"active",order:6,is01:false,permissions:{supervise:true,viewReports:true}},
+ {id:"rlk",name:"rlk mnr 33",role:"Supervisor",description:"Acompanha os membros e a disciplina.",status:"active",order:7,is01:false,permissions:{supervise:true,viewReports:true}},
+ {id:"dg",name:"DG",role:"Piloto / P1",description:"Responsável pela pilotagem da tropa.",status:"active",order:8,is01:false,permissions:{pilot:true}}
+];
+let members=load(KEY,defaultMembers), audit=load(LOGKEY,[]), selectedId=null, creating=false;
+function load(k,fallback){try{const x=localStorage.getItem(k);return x?JSON.parse(x):structuredClone(fallback)}catch(e){return JSON.parse(JSON.stringify(fallback))}}
+function saveAll(){localStorage.setItem(KEY,JSON.stringify(members));localStorage.setItem(LOGKEY,JSON.stringify(audit));}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function sorted(){return [...members].sort((a,b)=>(+a.order||999)-(+b.order||999));}
+function current(){return members.find(m=>m.id===document.getElementById("currentUser").value)||null;}
+function canManageMembers(m=current()){return !!m&&(!!m.is01||/dono|chefe geral/i.test(m.role||""));}
+function log(action,detail){audit.unshift({at:new Date().toLocaleString("pt-BR"),by:current()?.name||"Sessão",action,detail});audit=audit.slice(0,150);saveAll();}
+function setAccessUI(){
+ const ok=canManageMembers(), badge=document.getElementById("sessionBadge");
+ badge.textContent=ok?"01 ou superior • Pode adicionar/remover":"Acesso limitado";badge.className="pill"+(ok?" one":" off");
+ document.getElementById("newBtn").disabled=!ok;
+ document.getElementById("sessionHelp").textContent=ok?"Sua sessão tem nível 01 ou superior. Você pode adicionar e remover membros.":"Membros 01 e cargos superiores (como Dono) podem adicionar ou remover membros.";
+ document.getElementById("is01").disabled=!ok;
+ document.getElementById("oneHelp").textContent=ok?"Você pode marcar/desmarcar a autorização 01.":"Apenas um membro 01 pode alterar essa autorização.";
+}
+function renderSession(){
+ const sel=document.getElementById("currentUser"),old=sel.value;
+ sel.innerHTML=sorted().map(m=>`<option value="${esc(m.id)}">${esc(m.name)} — ${esc(m.role)}</option>`).join("");
+ if(members.some(m=>m.id===old))sel.value=old;else if(members.some(m=>m.id==="bruxo"))sel.value="bruxo";else sel.value=members[0]?.id||"";
+ setAccessUI();
+}
+function render(){
+ const q=document.getElementById("search").value.toLowerCase(),f=document.getElementById("filter").value;
+ const list=sorted().filter(m=>(m.name+" "+m.role).toLowerCase().includes(q)&&(f==="all"||(f==="01"?m.is01:m.status===f)));
+ document.getElementById("memberList").innerHTML=list.length?list.map(m=>`<div class="member ${selectedId===m.id?"selected":""}" data-id="${esc(m.id)}"><div class="avatar">${esc(m.name.trim().slice(0,2).toUpperCase())}</div><div class="member-info"><div class="member-name">${esc(m.name)}</div><div class="member-role">${esc(m.role)}</div></div>${m.is01?'<span class="pill one">01</span>':""}<span class="pill ${m.status==="inactive"?"off":""}">${m.status==="active"?"Ativo":"Inativo"}</span><button type="button">›</button></div>`).join(""):'<div class="empty">Nenhum membro encontrado.</div>';
+ document.querySelectorAll(".member").forEach(el=>el.addEventListener("click",()=>selectMember(el.dataset.id)));
+ document.getElementById("total").textContent=members.length;document.getElementById("active").textContent=members.filter(m=>m.status==="active").length;document.getElementById("ones").textContent=members.filter(m=>m.is01).length;
+ document.getElementById("perms").textContent=members.reduce((n,m)=>n+Object.values(m.permissions||{}).filter(Boolean).length,0);
+ document.getElementById("roleRows").innerHTML=sorted().map(m=>`<tr><td>${esc(m.name)}</td><td>${esc(m.role)}</td><td>${m.is01?"SIM":"Não"}</td><td>${permissionDefs.filter(([k])=>m.permissions?.[k]).map(([,v])=>esc(v)).join(", ")||"—"}</td><td>${m.status==="active"?"Ativo":"Inativo"}</td></tr>`).join("");
+ document.getElementById("auditList").innerHTML=audit.length?audit.map(a=>`<div class="log-item"><b>${esc(a.action)}</b> — ${esc(a.detail)}<time>${esc(a.at)} • por ${esc(a.by)}</time></div>`).join(""):'<div class="empty">Nenhuma alteração registrada ainda.</div>';
+ renderSession();
+}
+function showForm(){document.getElementById("emptyEditor").classList.add("hidden");document.getElementById("memberForm").classList.remove("hidden");}
+function hideForm(){document.getElementById("emptyEditor").classList.remove("hidden");document.getElementById("memberForm").classList.add("hidden");document.getElementById("editorTitle").textContent="Ficha do membro";}
+function drawPermissions(p={}){document.getElementById("permissions").innerHTML=permissionDefs.map(([k,v])=>`<label class="perm"><input type="checkbox" data-perm="${k}" ${p[k]?"checked":""}>${v}</label>`).join("");}
+function selectMember(id){const m=members.find(x=>x.id===id);if(!m)return;selectedId=id;creating=false;document.getElementById("editorTitle").textContent="Ficha do membro";document.getElementById("name").value=m.name;document.getElementById("role").value=m.role;document.getElementById("description").value=m.description||"";document.getElementById("status").value=m.status;document.getElementById("order").value=m.order;document.getElementById("is01").checked=!!m.is01;drawPermissions(m.permissions||{});document.getElementById("removeBtn").classList.toggle("hidden",!canManageMembers());showForm();render();}
+function newMember(){if(!canManageMembers()){alert("Apenas membros 01 ou superiores podem adicionar membros.");return;}selectedId=null;creating=true;document.getElementById("editorTitle").textContent="Cadastrar novo membro";document.getElementById("name").value="";document.getElementById("role").value="";document.getElementById("description").value="";document.getElementById("status").value="active";document.getElementById("order").value=members.length+1;document.getElementById("is01").checked=false;drawPermissions({});document.getElementById("removeBtn").classList.add("hidden");showForm();render();document.getElementById("name").focus();}
+document.getElementById("memberForm").addEventListener("submit",e=>{
+ e.preventDefault();const name=document.getElementById("name").value.trim(),role=document.getElementById("role").value.trim();if(!name||!role)return;
+ const old=members.find(m=>m.id===selectedId);
+ if(creating&&!canManageMembers()){alert("Apenas membros 01 ou superiores podem adicionar membros.");return;}
+ if(old&&document.getElementById("is01").checked!==!!old.is01&&!canManageMembers()){alert("Apenas um membro 01 ou superior pode alterar a autorização 01.");return;}
+ const data={name,role,description:document.getElementById("description").value.trim(),status:document.getElementById("status").value,order:Math.max(1,Number(document.getElementById("order").value)||members.length+1),is01:document.getElementById("is01").checked,permissions:Object.fromEntries(permissionDefs.map(([k])=>[k,!!document.querySelector(`[data-perm="${k}"]`).checked]))};
+ if(creating){data.id="m-"+Date.now().toString(36);members.push(data);selectedId=data.id;log("Membro adicionado",`${name} (${role})`);}
+ else{const i=members.findIndex(m=>m.id===selectedId);if(i>=0){members[i]={...members[i],...data};log("Ficha atualizada",`${name} — ${role}`);}}
+ saveAll();creating=false;renderSession();selectMember(selectedId);render();
+});
+document.getElementById("removeBtn").addEventListener("click",()=>{if(!canManageMembers()){alert("Apenas membros 01 ou superiores podem remover membros.");return;}const m=members.find(x=>x.id===selectedId);if(!m)return;if(!confirm(`Tem certeza que deseja remover ${m.name} da facção?`))return;log("Membro removido",m.name);members=members.filter(x=>x.id!==selectedId);selectedId=null;saveAll();hideForm();render();});
+document.getElementById("newBtn").addEventListener("click",newMember);
+document.getElementById("cancelBtn").addEventListener("click",()=>{creating=false;if(selectedId)selectMember(selectedId);else hideForm();});
+document.getElementById("currentUser").addEventListener("change",()=>{localStorage.setItem(SESSIONKEY,document.getElementById("currentUser").value);setAccessUI();if(selectedId)selectMember(selectedId);else render();});
+document.getElementById("search").addEventListener("input",render);document.getElementById("filter").addEventListener("change",render);
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));["members","roles","audit"].forEach(t=>document.getElementById(t+"Tab").classList.toggle("hidden",t!==b.dataset.tab));}));
+document.getElementById("backupBtn").addEventListener("click",()=>{const payload={members,audit,exportedAt:new Date().toISOString()};const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="backup-tropa-da-mare.json";a.click();URL.revokeObjectURL(url);});
+document.getElementById("importBtn").addEventListener("click",()=>document.getElementById("importFile").click());
+document.getElementById("importFile").addEventListener("change",async e=>{const file=e.target.files[0];if(!file)return;if(!canManageMembers()){alert("Apenas membros 01 ou superiores podem importar backup.");e.target.value="";return;}try{const data=JSON.parse(await file.text());const incoming=Array.isArray(data)?data:data.members;if(!Array.isArray(incoming)||!incoming.every(m=>m&&m.id&&m.name&&m.role)){throw new Error("Formato inválido");}if(!confirm("Importar vai substituir a lista atual. Deseja continuar?"))return;members=incoming.map((m,i)=>({...m,order:Number(m.order)||i+1,is01:!!m.is01,permissions:m.permissions||{}}));if(data.audit&&Array.isArray(data.audit))audit=data.audit;log("Backup importado",`${members.length} membros carregados`);saveAll();selectedId=null;hideForm();render();alert("Backup importado com sucesso.");}catch(err){alert("Não foi possível importar: arquivo inválido.");}finally{e.target.value="";}});
+document.getElementById("clearLogBtn").addEventListener("click",()=>{if(!canManageMembers()){alert("Somente membros 01 podem limpar o histórico.");return;}if(confirm("Apagar todo o histórico local?")){audit=[];saveAll();render();}});
+const savedSession=localStorage.getItem(SESSIONKEY);
+render();
+if(savedSession&&members.some(m=>m.id===savedSession)){document.getElementById("currentUser").value=savedSession;setAccessUI();}
+</script>
+</body>
+</html>
