@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recrutamento - Facção RP</title>
+    <style>
+        :root {
+            --bg-color: #121214;
+            --form-bg: #1d1d22;
+            --primary-color: #0076ff;
+            --primary-hover: #0056b3;
+            --text-color: #ffffff;
+            --text-secondary: #a8a8b3;
+            --input-bg: #141416;
+            --border-color: #29292e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .form-container {
+            background-color: var(--form-bg);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 600px;
+            border-top: 5px solid var(--primary-color);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary-color);
+        }
+
+        p.subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            color: var(--primary-color);
+            margin: 20px 0 10px 0;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-color);
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-group input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .warning-text {
+            color: #ff4a4a;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h1>Formulário de Recrutamento</h1>
+        <p class="subtitle">Preencha todos os dados corretamente para a avaliação da liderança.</p>
+
+        <form id="rpForm">
+            
+            <div class="section-title">Informações OOC (Fora do Personagem)</div>
+            
+            <div class="form-group">
+                <label for="nome_ooc">Seu Nome Real ou Apelido:</label>
+                <input type="text" id="nome_ooc" required placeholder="Ex: João">
+            </div>
+
+            <div class="form-group">
+                <label for="idade_ooc">Sua Idade Real (Mínimo 13 anos):</label>
+                <input type="number" id="idade_ooc" min="13" required placeholder="Ex: 15">
+                <p class="warning-text">* Menores de 13 anos serão automaticamente recusados.</p>
+            </div>
+
+            <div class="form-group">
+                <label for="discord">Seu Discord (Usuário):</label>
+                <input type="text" id="discord" required placeholder="Ex: @seu_usuario">
+            </div>
+
+            <div class="form-group">
+                <label for="tempo_rp">Quanto tempo você joga RP?</label>
+                <input type="text" id="tempo_rp" required placeholder="Ex: 6 meses, 1 ano...">
+            </div>
+
+            <div class="section-title">Informações IC (Do Personagem)</div>
+
+            <div class="form-group">
+                <label for="nome_ic">Nome do Personagem (Nome_Sobrenome):</label>
+                <input type="text" id="nome_ic" required placeholder="Ex: Tony_Montana">
+            </div>
+
+            <div class="form-group">
+                <label for="historia_ic">Breve história do seu personagem e por que quer entrar:</label>
+                <textarea id="historia_ic" required placeholder="Conte um pouco sobre o passado do seu personagem..."></textarea>
+            </div>
+
+            <div class="section-title">Conhecimento de Regras</div>
+
+            <div class="form-group">
+                <label for="meta_gaming">O que é Meta Gaming (MG)? Explique com suas palavras:</label>
+                <textarea id="meta_gaming" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="power_gaming">O que é Power Gaming (PG)? Explique com suas palavras:</label>
+                <textarea id="power_gaming" required></textarea>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="termos" required>
+                <label for="termos">Estou ciente de que se eu quebrar as regras serei punido.</label>
+            </div>
+
+            <button type="submit" id="btnEnviar">Enviar Formulário</button>
+        </form>
+    </div>
+
+    <script>
+        // Webhook do seu servidor injetado com sucesso!
+        const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1568808358650060950/_b9OziBSfXpM7xGoAu9g4Ysjen9BeAtqHAz2jQvhVz2sK4gb7eSKOS3GZZZTTsapKpcj";
+
+        document.getElementById('rpForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const idade = parseInt(document.getElementById('idade_ooc').value);
+            const button = document.getElementById('btnEnviar');
+
+            if (idade < 13) {
+                alert('Desculpe, você não tem a idade mínima de 13 anos para entrar na facção.');
+                return;
+            }
+
+            button.disabled = true;
+            button.innerText = "Enviando...";
+
+            const dados = {
+                nome_ooc: document.getElementById('nome_ooc').value,
+                idade_ooc: idade,
+                discord: document.getElementById('discord').value,
+                tempo_rp: document.getElementById('tempo_rp').value,
+                nome_ic: document.getElementById('nome_ic').value,
+                historia_ic: document.getElementById('historia_ic').value,
+                meta_gaming: document.getElementById('meta_gaming').value,
+                power_gaming: document.getElementById('power_gaming').value
+            };
+
+            const payload = {
+                embeds: [{
+                    title: "📥 NOVO FORMULÁRIO DE RECRUTAMENTO",
+                    color: 30463, 
+                    fields: [
+                        { name: "👤 Nome OOC", value: dados.nome_ooc, inline: true },
+                        { name: "🎂 Idade OOC", value: dados.idade_ooc.toString(), inline: true },
+                        { name: "💬 Discord", value: dados.discord, inline: true },
+                        { name: "⏳ Tempo de RP", value: dados.tempo_rp, inline: true },
+                        { name: "🪪 Nome do Personagem (IC)", value: dados.nome_ic, inline: false },
+                        { name: "📜 História do Personagem", value: dados.historia_ic, inline: false },
+                        { name: "🧠 O que é MG?", value: dados.meta_gaming, inline: false },
+                        { name: "⚡ O que é PG?", value: dados.power_gaming, inline: false }
+                    ],
+                    footer: { text: "Sistema de Recrutamento Automatizado" },
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            fetch(DISCORD_WEBHOOK_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Formulário enviado com sucesso! Suas respostas foram enviadas para a nossa Staff.');
+                    document.getElementById('rpForm').reset();
+                } else {
+                    alert('Erro ao enviar. Verifique se o link do Webhook continua ativo no Discord.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro de conexão ao enviar o formulário.');
+            })
+            .finally(() => {
+                button.disabled = false;
+                button.innerText = "Enviar Formulário";
+            });
+        });
+    </script>
+
+</body>
+</html>
