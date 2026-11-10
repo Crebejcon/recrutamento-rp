@@ -168,6 +168,13 @@
             </div>
 
             <div class="form-group">
+                <label for="tempo_rp">Quanto tempo você joga RP?</label>
+                <input type="text" id="tempo_rp" required placeholder="Ex: 6 meses, 1 ano...">
+            </div>
+
+            <div class="section-title">Informações IC (Do Personagem)</div>
+
+            <div class="form-group">
                 <label for="id_jogo">ID do jogo (obrigatório):</label>
                 <input type="text" id="id_jogo" required placeholder="Digite seu ID dentro do jogo">
             </div>
@@ -177,12 +184,6 @@
                 <input type="text" id="contato_jogo" placeholder="Informe seu contato no jogo, se tiver">
             </div>
 
-            <div class="form-group">
-                <label for="tempo_rp">Quanto tempo você joga RP?</label>
-                <input type="text" id="tempo_rp" required placeholder="Ex: 6 meses, 1 ano...">
-            </div>
-
-            <div class="section-title">Informações IC (Do Personagem)</div>
 
             <div class="form-group">
                 <label for="nome_ic">Nome do Personagem (Nome_Sobrenome):</label>
@@ -254,10 +255,10 @@
                         { name: "👤 Nome OOC", value: dados.nome_ooc, inline: true },
                         { name: "🎂 Idade OOC", value: dados.idade_ooc.toString(), inline: true },
                         { name: "💬 Discord", value: dados.discord, inline: true },
-                        { name: "🆔 ID do jogo", value: dados.id_jogo, inline: true },
-                        { name: "🎮 Contato do jogo (opcional)", value: dados.contato_jogo, inline: true },
                         { name: "⏳ Tempo de RP", value: dados.tempo_rp, inline: true },
                         { name: "🪪 Nome do Personagem (IC)", value: dados.nome_ic, inline: false },
+                        { name: "🆔 ID do jogo", value: dados.id_jogo, inline: true },
+                        { name: "🎮 Contato do jogo (opcional)", value: dados.contato_jogo, inline: true },
                         { name: "📜 História do Personagem", value: dados.historia_ic, inline: false },
                         { name: "🧠 O que é MG?", value: dados.meta_gaming, inline: false },
                         { name: "⚡ O que é PG?", value: dados.power_gaming, inline: false }
