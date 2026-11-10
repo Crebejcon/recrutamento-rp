@@ -168,6 +168,11 @@
             </div>
 
             <div class="form-group">
+                <label for="contato_jogo">Contato do jogo (obrigatório):</label>
+                <input type="text" id="contato_jogo" required placeholder="Informe seu contato/ID utilizado dentro do jogo">
+            </div>
+
+            <div class="form-group">
                 <label for="tempo_rp">Quanto tempo você joga RP?</label>
                 <input type="text" id="tempo_rp" required placeholder="Ex: 6 meses, 1 ano...">
             </div>
@@ -227,6 +232,7 @@
                 nome_ooc: document.getElementById('nome_ooc').value,
                 idade_ooc: idade,
                 discord: document.getElementById('discord').value,
+                contato_jogo: document.getElementById('contato_jogo').value,
                 tempo_rp: document.getElementById('tempo_rp').value,
                 nome_ic: document.getElementById('nome_ic').value,
                 historia_ic: document.getElementById('historia_ic').value,
@@ -242,6 +248,7 @@
                         { name: "👤 Nome OOC", value: dados.nome_ooc, inline: true },
                         { name: "🎂 Idade OOC", value: dados.idade_ooc.toString(), inline: true },
                         { name: "💬 Discord", value: dados.discord, inline: true },
+                        { name: "🎮 Contato do jogo", value: dados.contato_jogo, inline: true },
                         { name: "⏳ Tempo de RP", value: dados.tempo_rp, inline: true },
                         { name: "🪪 Nome do Personagem (IC)", value: dados.nome_ic, inline: false },
                         { name: "📜 História do Personagem", value: dados.historia_ic, inline: false },
