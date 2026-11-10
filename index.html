@@ -173,11 +173,6 @@
             </div>
 
             <div class="form-group">
-                <label for="telefone_jogo">Número de telefone do jogo (obrigatório):</label>
-                <input type="text" id="telefone_jogo" required placeholder="Digite seu número de telefone do jogo">
-            </div>
-
-            <div class="form-group">
                 <label for="contato_jogo">Contato do jogo (opcional):</label>
                 <input type="text" id="contato_jogo" placeholder="Informe seu contato no jogo, se tiver">
             </div>
@@ -243,7 +238,6 @@
                 idade_ooc: idade,
                 discord: document.getElementById('discord').value,
                 id_jogo: document.getElementById('id_jogo').value,
-                telefone_jogo: document.getElementById('telefone_jogo').value,
                 contato_jogo: document.getElementById('contato_jogo').value || "Não informado",
                 tempo_rp: document.getElementById('tempo_rp').value,
                 nome_ic: document.getElementById('nome_ic').value,
@@ -261,7 +255,6 @@
                         { name: "🎂 Idade OOC", value: dados.idade_ooc.toString(), inline: true },
                         { name: "💬 Discord", value: dados.discord, inline: true },
                         { name: "🆔 ID do jogo", value: dados.id_jogo, inline: true },
-                        { name: "📱 Telefone do jogo", value: dados.telefone_jogo, inline: true },
                         { name: "🎮 Contato do jogo (opcional)", value: dados.contato_jogo, inline: true },
                         { name: "⏳ Tempo de RP", value: dados.tempo_rp, inline: true },
                         { name: "🪪 Nome do Personagem (IC)", value: dados.nome_ic, inline: false },
